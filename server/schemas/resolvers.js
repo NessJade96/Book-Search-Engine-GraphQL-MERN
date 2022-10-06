@@ -1,11 +1,12 @@
 const {User, Book} = require('../models');
+// import sign token function from auth
 const {signToken} = require('../utils/auth');
 const {AuthenticationError} = require('apollo-server-express');
 
 const resolvers = {
 	Query: {
 		// Get a single user by thier id or username
-		User: async ({user = null, params}) => {
+		me: async ({user = null, params}) => {
 			const foundUser = await User.findOne({
 				$or: [{_id: user ? user._id : params.id}, {username: params.username}],
 			});

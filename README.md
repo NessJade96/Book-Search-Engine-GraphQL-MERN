@@ -43,4 +43,6 @@ SO THAT I can keep a list of books to purchase
 
 1. Created Readme, setup folders, and created the mutations and queries on the backend of application.
 
+2.
+
 Thank you, Vanessa Bloom <(^.^)>
