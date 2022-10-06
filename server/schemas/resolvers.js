@@ -6,14 +6,14 @@ const {AuthenticationError} = require('apollo-server-express');
 const resolvers = {
 	Query: {
 		// Get a single user by thier id or username
-		me: async ({user = null, params}) => {
-			const foundUser = await User.findOne({
-				$or: [{_id: user ? user._id : params.id}, {username: params.username}],
-			});
-			if (!foundUser) {
-				return;
+		me: async (parent, args, context) => {
+			console.log('🚀 ~ file: resolvers.js ~ line 10 ~ me: ~ context', context);
+
+			if (context.user) {
+				const userInfo = await User.findOne({_id: context.user._id});
+				return userInfo;
 			}
-			return User.find(foundUser);
+			throw new AuthenticationError('You need to be logged in!');
 		},
 	},
 	Mutation: {
@@ -37,28 +37,28 @@ const resolvers = {
 			return {token, user};
 		},
 		// save a book to a users 'savedBooks' field by adding it to the set (this prevents duplicates)
-		saveBook: async (parent, {input}) => {
-			const user = User.findOneAndUpdate(
-				{_id: user._id},
-				{$addToSet: {savedBooks: body}},
-				{new: true, runValidators: true}
-			);
-			if (!user) {
-				throw new AuthenticationError('No user found to update books');
+		saveBook: async (parent, {input}, context) => {
+			if (context.user) {
+				const user = User.findByIdAndUpdate(
+					{_id: user._id},
+					{$push: {savedBooks: input}},
+					{new: true, runValidators: true}
+				);
+				return user;
 			}
-			return user;
+			throw new AuthenticationError('No user found to update books');
 		},
 		// remove a book from `savedBooks`
 		removeBook: async (parent, {bookId}) => {
-			const book = Book.findOneAndDelete(
+			const userBooks = Book.findOneAndUpdate(
 				{_id: user._id},
-				{$pull: {savedBooks: {bookId: params.bookId}}},
+				{$pull: {savedBooks: {bookId}}},
 				{new: true}
 			);
 			if (!book) {
 				throw new AuthenticationError('No book under this Id to remove');
 			}
-			return book;
+			return userBooks;
 		},
 	},
 };
