@@ -7,10 +7,10 @@ const resolvers = {
 	Query: {
 		// Get a single user by thier id or username
 		me: async (parent, args, context) => {
-			console.log('🚀 ~ file: resolvers.js ~ line 10 ~ me: ~ context', context);
-
 			if (context.user) {
-				const userInfo = await User.findOne({_id: context.user._id});
+				const userInfo = await User.findOne({_id: context.user._id}).select(
+					'-__v -password'
+				);
 				return userInfo;
 			}
 			throw new AuthenticationError('You need to be logged in!');
@@ -49,16 +49,16 @@ const resolvers = {
 			throw new AuthenticationError('No user found to update books');
 		},
 		// remove a book from `savedBooks`
-		removeBook: async (parent, {bookId}) => {
-			const userBooks = Book.findOneAndUpdate(
-				{_id: user._id},
-				{$pull: {savedBooks: {bookId}}},
-				{new: true}
-			);
-			if (!book) {
-				throw new AuthenticationError('No book under this Id to remove');
+		removeBook: async (parent, {bookId}, context) => {
+			if (context.user) {
+				const userBooks = Book.findOneAndUpdate(
+					{_id: user._id},
+					{$pull: {savedBooks: {bookId}}},
+					{new: true}
+				);
+				return userBooks;
 			}
-			return userBooks;
+			throw new AuthenticationError('No book under this Id to remove');
 		},
 	},
 };
