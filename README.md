@@ -53,4 +53,6 @@ SO THAT I can keep a list of books to purchase
 
 5. In the savedBooks.js file I converted the functions with useQuery(GET_ME), and useMutation(REMOVE_BOOK), to update the GraphQL database.
 
+6. The login and add user pages/requests converted over to GraphQL queries and mutations.
+
 Thank you, Vanessa Bloom <(^.^)>
