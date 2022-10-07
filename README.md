@@ -37,12 +37,20 @@ SO THAT I can keep a list of books to purchase
 
 4. Create an Apollo Provider so that requests can communicate with an Apollo Server.
 
+   > searchBooks.js line 34 (useEffect hooks to set local storage)
+
 5. Deploy your application to Heroku with a MongoDB database using MongoDB Atlas.
 
 ## Commit notes:
 
 1. Created Readme, setup folders, and created the mutations and queries on the backend of application.
 
-2.
+2. Worked through the backend folders, server.js, index.js etc. to ensure everything was linking properly and tweeked some resolvers funcitons.
+
+3. Using Apollo I was able to create the mutations and queries on the client side in the utils folder.
+
+4. In the searchBooks.js file I implemented the useMutation() Hook to execute the SAVE_BOOK mutation in the handeSaveBook() function, coverting it to GraphQL.
+
+5.
 
 Thank you, Vanessa Bloom <(^.^)>

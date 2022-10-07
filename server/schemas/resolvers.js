@@ -40,7 +40,7 @@ const resolvers = {
 		saveBook: async (parent, {input}, context) => {
 			if (context.user) {
 				const user = User.findByIdAndUpdate(
-					{_id: user._id},
+					{_id: context.user._id},
 					{$push: {savedBooks: input}},
 					{new: true, runValidators: true}
 				);
@@ -51,12 +51,12 @@ const resolvers = {
 		// remove a book from `savedBooks`
 		removeBook: async (parent, {bookId}, context) => {
 			if (context.user) {
-				const userBooks = Book.findOneAndUpdate(
-					{_id: user._id},
+				const userBooks = User.findOneAndUpdate(
+					{_id: context.user._id},
 					{$pull: {savedBooks: {bookId}}},
 					{new: true}
 				);
-				return userBooks;
+				return console.log('Book removed from savedBooks'), userBooks;
 			}
 			throw new AuthenticationError('No book under this Id to remove');
 		},
