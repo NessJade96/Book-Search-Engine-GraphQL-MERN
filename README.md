@@ -51,6 +51,6 @@ SO THAT I can keep a list of books to purchase
 
 4. In the searchBooks.js file I implemented the useMutation() Hook to execute the SAVE_BOOK mutation in the handeSaveBook() function, coverting it to GraphQL.
 
-5.
+5. In the savedBooks.js file I converted the functions with useQuery(GET_ME), and useMutation(REMOVE_BOOK), to update the GraphQL database.
 
 Thank you, Vanessa Bloom <(^.^)>

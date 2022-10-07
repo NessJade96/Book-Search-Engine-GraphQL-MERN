@@ -14,7 +14,6 @@ import {searchGoogleBooks} from '../utils/API';
 import {saveBookIds, getSavedBookIds} from '../utils/localStorage';
 
 import {useMutation, useQuery} from '@apollo/client';
-import {QUERY_TECH} from '../utils/queries';
 import {SAVE_BOOK} from '../utils/mutations';
 
 const SearchBooks = () => {
@@ -80,7 +79,7 @@ const SearchBooks = () => {
 		}
 
 		try {
-			const response = await saveBook({variables: {$input: bookToSave}});
+			const response = await saveBook({variables: {input: bookToSave}});
 
 			if (!response.ok) {
 				throw new Error('something went wrong!');
