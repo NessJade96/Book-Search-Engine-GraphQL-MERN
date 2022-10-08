@@ -11,7 +11,11 @@ const LoginForm = () => {
 	const [validated] = useState(false);
 	const [showAlert, setShowAlert] = useState(false);
 
-	const [loginUser, {error, data}] = useMutation(LOGIN_USER);
+	const [loginUser] = useMutation(LOGIN_USER);
+	console.log(
+		'🚀 ~ file: LoginForm.js ~ line 15 ~ LoginForm ~ loginUser',
+		loginUser
+	);
 
 	const handleInputChange = (event) => {
 		const {name, value} = event.target;
@@ -23,6 +27,10 @@ const LoginForm = () => {
 
 		// check if form has everything (as per react-bootstrap docs)
 		const form = event.currentTarget;
+		console.log(
+			'🚀 ~ file: LoginForm.js ~ line 30 ~ handleFormSubmit ~ form',
+			form
+		);
 		if (form.checkValidity() === false) {
 			event.preventDefault();
 			event.stopPropagation();
@@ -30,15 +38,13 @@ const LoginForm = () => {
 		}
 
 		try {
-			const response = await loginUser({variables: {...userFormData}});
-
-			if (!response.ok) {
-				throw new Error('something went wrong!');
-			}
-
-			const {token, user} = await response.json();
-			console.log(user);
-			Auth.login(token);
+			console.log('test');
+			const {data} = await loginUser({variables: userFormData});
+			console.log(
+				'🚀 ~ file: LoginForm.js ~ line 34 ~ handleFormSubmit ~ data',
+				data
+			);
+			Auth.login(data.login.token);
 		} catch (err) {
 			console.error(err);
 			setShowAlert(true);
