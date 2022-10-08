@@ -9,14 +9,10 @@ import {REMOVE_BOOK} from '../utils/mutations';
 import {removeBookId} from '../utils/localStorage';
 
 const SavedBooks = () => {
-	// executes the GET_ME query on load and saves it to a variable baned userData
-	const userData = useQuery(GET_ME);
-	console.log(
-		'🚀 ~ file: SavedBooks.js ~ line 14 ~ SavedBooks ~ userData',
-		userData
-	);
+	// executes the GET_ME query on load and saves it
+	const {data, refetch, loading} = useQuery(GET_ME);
 
-	const usersBooks = userData.data.me.savedBooks;
+	const usersBooks = data?.me?.savedBooks ?? [];
 
 	const [deleteBook] = useMutation(REMOVE_BOOK);
 
@@ -31,6 +27,7 @@ const SavedBooks = () => {
 			await deleteBook({variables: {bookId}});
 
 			// upon success, remove book's id from localStorage
+			refetch();
 			removeBookId(bookId);
 		} catch (err) {
 			console.log('something went wrong :(');
@@ -39,8 +36,12 @@ const SavedBooks = () => {
 	};
 
 	// if data isn't here yet, say so
-	if (!usersBooks.length) {
+	if (loading) {
 		return <h2>LOADING...</h2>;
+	}
+
+	if (!usersBooks.length) {
+		return <h2>No books saved yet</h2>;
 	}
 
 	return (
@@ -72,7 +73,7 @@ const SavedBooks = () => {
 								<Card.Body>
 									<Card.Title>{book.title}</Card.Title>
 									<p className="small">Authors: {book.authors}</p>
-									<Card.Text>{book.description}</Card.Text>
+									{/* <Card.Text>{book.description}</Card.Text> */}
 									<Button
 										className="btn-block btn-danger"
 										onClick={() => handleDeleteBook(book.bookId)}
