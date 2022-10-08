@@ -20,7 +20,7 @@ SO THAT I can keep a list of books to purchase
 
 ## Screenshots:
 
-![image](./src/assets/)
+![image](./assets/images/saved%20books.jpg)
 
 ## Links:
 
@@ -36,8 +36,6 @@ SO THAT I can keep a list of books to purchase
 3. Modify the existing authentication middleware so that it works in the context of a GraphQL API.
 
 4. Create an Apollo Provider so that requests can communicate with an Apollo Server.
-
-   > searchBooks.js line 34 (useEffect hooks to set local storage)
 
 5. Deploy your application to Heroku with a MongoDB database using MongoDB Atlas.
 
@@ -56,5 +54,7 @@ SO THAT I can keep a list of books to purchase
 6. The login and add user pages/requests converted over to GraphQL queries and mutations.
 
 7. Removed all console logs to clean up code, added in the [savedBookIds] to line 37 in searchBooks.js so the userEffect will run each time that function is called. Also added in the refetchQueries in line 30 of the same file so the user would update and the saved books would refresh when you go onto the saved books page. Lastly, I had the wrong LOGIN_USER mutation variable names, fixed those and now the user can login successfully.
+
+8. Added picture to Readme
 
 Thank you, Vanessa Bloom <(^.^)>
