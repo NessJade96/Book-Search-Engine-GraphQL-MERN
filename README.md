@@ -2,7 +2,7 @@
 
 ## Description:
 
-Given starter code of a fully functioning Google Books API search engine built with a RESTful API, and refactor it to be a GraphQL API built with Apollo Server. The app was built using the MERN stack with a React front end, MongoDB database, and Node.js/Express.js server and API. It's already set up to allow users to save book searches to the back end.
+I was given starter code of a fully functioning Google Books API search engine built with a RESTful API, and I successfully refactored it to be a GraphQL API built with Apollo Server. The app was built using the MERN stack with a React front end, MongoDB database, and Node.js/Express.js server and API.
 
 ## User Setup:
 
@@ -25,7 +25,7 @@ SO THAT I can keep a list of books to purchase
 ## Links:
 
 - GitHub repo: https://github.com/NessJade96/Book-Search-Engine-GraphQL-MERN
-- Deploy:
+- Deploy: https://evening-reaches-75620.herokuapp.com/
 
 ## planning notes:
 
@@ -56,5 +56,7 @@ SO THAT I can keep a list of books to purchase
 7. Removed all console logs to clean up code, added in the [savedBookIds] to line 37 in searchBooks.js so the userEffect will run each time that function is called. Also added in the refetchQueries in line 30 of the same file so the user would update and the saved books would refresh when you go onto the saved books page. Lastly, I had the wrong LOGIN_USER mutation variable names, fixed those and now the user can login successfully.
 
 8. Added picture to Readme
+
+9. Changed network connection and added the deployed application link
 
 Thank you, Vanessa Bloom <(^.^)>
